@@ -96,7 +96,7 @@ public class AccountController {
             return "error";
         }
     }
-    
+
     @RequestMapping(value="/my/account", method=RequestMethod.POST)
     public String saveAccount(@Validated AccountForm form, BindingResult bindingResult) {
         return "customerAccount";

@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.io.Serializable;
 
 /**
@@ -31,6 +33,9 @@ public class Customer implements Serializable {
     @NonNull
     private String password;
 
+    @NonNull
+    private String password_check;
+
     private String firstName;
 
     private String lastName;
@@ -42,4 +47,6 @@ public class Customer implements Serializable {
     private Prefecture prefecture;
 
     private String address;
+
+
 }

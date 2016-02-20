@@ -20,6 +20,7 @@ import tiscon1.model.UserPrincipal;
 import tiscon1.repository.CustomerRepository;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.constraints.Pattern;
 
 /**
  * @author kawasima
@@ -30,7 +31,8 @@ public class AccountController {
     CustomerRepository customerRepository;
 
     @ModelAttribute
-    AccountRereturn new AccountRegisterForm();
+    AccountRegisterForm setupForm() {
+        return new AccountRegisterForm();
     }
 
     @RequestMapping(value="/login")
@@ -72,7 +74,7 @@ public class AccountController {
         if (bindingResult.hasErrors()) {
             return "newAccountOrSignIn";
         }
-        Customer customer = new Customer(form.getName(), form.getEmail(), form.getPassword());
+        Customer customer = new Customer(form.getName(), form.getEmail(), form.getPassword(),form.getPassword_check());
         customerRepository.save(customer);
         UserPrincipal principal = new UserPrincipal(form.getName());
         session.setAttribute("principal", principal);

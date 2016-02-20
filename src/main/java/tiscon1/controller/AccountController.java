@@ -30,8 +30,7 @@ public class AccountController {
     CustomerRepository customerRepository;
 
     @ModelAttribute
-    AccountRegisterForm setupForm() {
-        return new AccountRegisterForm();
+    AccountRereturn new AccountRegisterForm();
     }
 
     @RequestMapping(value="/login")

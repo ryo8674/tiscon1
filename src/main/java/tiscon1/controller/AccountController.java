@@ -71,7 +71,7 @@ public class AccountController {
     @RequestMapping(value="/register", method=RequestMethod.POST)
     public String register(@Validated AccountRegisterForm form, BindingResult bindingResult
     , HttpSession session) {
-        if (bindingResult.hasErrors()) {
+        if (bindingResult.hasErrors() || !form.getPassword().equals(form.getPassword_check())) {
             return "newAccountOrSignIn";
         }
         Customer customer = new Customer(form.getName(), form.getEmail(), form.getPassword(),form.getPassword_check());

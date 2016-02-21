@@ -57,7 +57,7 @@
                             <#assign error><#if spring.status.error> has-error</#if></#assign>
 
                             <div class="form-group${error}">
-                                <label for="password_check">Password Retype</label>
+                                <label for="password_check">Password (Confirm)</label>
                                 <input type="password" class="form-control" id="password_check" name="password_check" value="${spring.stringStatusValue}">
                                 <@spring.showErrors "<br/>", "help-block"/>
                             </div>

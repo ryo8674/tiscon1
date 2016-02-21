@@ -47,6 +47,5 @@ public class Customer implements Serializable {
     private Prefecture prefecture;
 
     private String address;
-
-
+    
 }

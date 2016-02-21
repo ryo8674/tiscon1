@@ -29,4 +29,22 @@ public class IndexController {
         return "index";
     }
 
+    /**
+     * 加筆よっしー
+     * 負荷テストのために実装
+     * itunesAPIに問い合わせを行わないトップページ
+     * @param model
+     * @return
+     */
+    @RequestMapping("/testEmpty")
+    public String test(Model model) {
+        try {
+            model.addAttribute("movieRank", categoryRepository.findEmptyList());
+            model.addAttribute("musicRank", categoryRepository.findEmptyList());
+        } catch (Exception e) {
+            throw new SystemException();
+        }
+        return "index";
+    }
+
 }

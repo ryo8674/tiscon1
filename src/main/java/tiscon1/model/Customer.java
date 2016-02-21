@@ -31,6 +31,9 @@ public class Customer implements Serializable {
     @NonNull
     private String password;
 
+    @NonNull
+    private String password_check;
+
     private String firstName;
 
     private String lastName;
@@ -42,4 +45,5 @@ public class Customer implements Serializable {
     private Prefecture prefecture;
 
     private String address;
+
 }

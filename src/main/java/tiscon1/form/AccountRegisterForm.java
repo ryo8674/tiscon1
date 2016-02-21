@@ -15,7 +15,7 @@ public class AccountRegisterForm implements Serializable {
     @Size(min = 1, max = 100)
     @NotEmpty
     private String name;
-
+    
     @NotEmpty
     private String email;
 

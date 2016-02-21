@@ -27,6 +27,8 @@ public class CategoryRepositoryImpl implements CategoryRepository {
      */
     public static final String MOVIE_ID = "33";
     public static final String MUSIC_ID = "34";
+    //負荷対策用　3件だけ取得するAPIのアドレス
+    static final String SEARCH_URL_3 = "https://itunes.apple.com/jp/rss/top{genreName}/limit=3/genre={subgenreId}/json";
     static final String SEARCH_URL = "https://itunes.apple.com/jp/rss/top{genreName}/limit=10/genre={subgenreId}/json";
     static final String LOOKUP_ID_URL = "https://itunes.apple.com/lookup?country=JP&id={id}";
 
@@ -72,6 +74,34 @@ public class CategoryRepositoryImpl implements CategoryRepository {
             top10.add(searchItem(genreId, (String) mapId.get("attributes").get("im:id")));
         }
         return top10;
+    }
+
+    //ランキングを3件返すメソッド
+    @Override
+    public List<Item> findTop3(String genreId, String subgenreId) throws IOException{
+        // プロキシ設定が不要の場合
+        RestTemplate rest = new RestTemplate();
+        // プロキシ設定が必要の場合
+        // RestTemplate rest = myRest("proxy.co.jp", 8080);
+
+        String jsonString = rest.getForObject(SEARCH_URL_3, String.class, getGenreName(genreId), subgenreId);
+        ObjectMapper mapper = new ObjectMapper();
+        Map<String, Object> top10Map = (Map<String, Object>) mapper.readValue(jsonString, Map.class).get("feed");
+        List<Map<String, Object>> top10List = (List<Map<String, Object>>) top10Map.get("entry");
+
+        List<Item> top10 = new ArrayList<Item>();
+        for (Map<String, Object> map : top10List) {
+            Map<String, Map<String, Object>> mapId = (Map<String, Map<String, Object>>) map.get("id");
+            top10.add(searchItem(genreId, (String) mapId.get("attributes").get("im:id")));
+        }
+        return top10;
+    }
+
+    //空のリストを返すメソッド
+    @Override
+    public List<Item> findEmptyList(){
+        return new ArrayList<Item>();
+
     }
 
     public Item searchItem(String genreId, String id) throws IOException {

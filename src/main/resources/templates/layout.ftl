@@ -59,7 +59,10 @@
                                 <div class="yamm-content">
                                     <div class="row">
                                             <div class="col-sm-3">
-                                                <a href="/logout" class="layout-menu-font">Logout</a>
+                                            <ul>
+                                              <!--  <li><a href="/logout" class="layout-menu-font">Logout</a></li> -->
+                                               <li><a href="/my/account?id=${principal.id}" class="layout-menu-font">MyPage</a></li> <!--追記-->
+                                            </ul>
                                             </div>
                                     </div>
                                 </div>

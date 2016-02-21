@@ -47,11 +47,21 @@
                             <#assign error><#if spring.status.error> has-error</#if></#assign>
 
                             <div class="form-group${error}">
-
                                 <label for="password">Password</label>
                                 <input type="password" class="form-control" id="password" name="password" value="${spring.stringStatusValue}">
                                 <@spring.showErrors "<br/>", "help-block"/>
                             </div>
+
+
+                            <@spring.bind "accountRegisterForm.password_check"/>
+                            <#assign error><#if spring.status.error> has-error</#if></#assign>
+
+                            <div class="form-group${error}">
+                                <label for="password_check">Password (Confirm)</label>
+                                <input type="password" class="form-control" id="password_check" name="password_check" value="${spring.stringStatusValue}">
+                                <@spring.showErrors "<br/>", "help-block"/>
+                            </div>
+
                             <div class="text-center">
                                 <button type="submit" class="btn btn-primary"><i class="fa fa-user-md"></i> Register</button>
                             </div>

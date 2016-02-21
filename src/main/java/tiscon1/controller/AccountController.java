@@ -43,7 +43,7 @@ public class AccountController {
                         cb.equal(root.get("password"), form.getPassword())
                 ));
         if (customer != null) {
-            session.setAttribute("principal", new UserPrincipal(customer.getName()));
+            session.setAttribute("principal", new UserPrincipal(customer.getName(),customer.getId()));
             return "redirect:/my/account?id=" + customer.getId();
         } else {
             return "newAccountOrSignIn";
@@ -75,7 +75,7 @@ public class AccountController {
         }
         Customer customer = new Customer(form.getName(), form.getEmail(), form.getPassword());
         customerRepository.save(customer);
-        UserPrincipal principal = new UserPrincipal(form.getName());
+        UserPrincipal principal = new UserPrincipal(form.getName(),customer.getId());
         session.setAttribute("principal", principal);
         return "redirect:/my/account?id=" + customer.getId();
     }
